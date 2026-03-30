@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@font-face {
+    font-family: 'HelveticaRegular';
+    src: url('./assets/font/HelveticaNowDisplay-Regular.ttf');
+}
+
+.HelveticaRegular {
+    font-family: 'HelveticaRegular';
+}
+
+@font-face {
+    font-family: 'HelveticaMedium';
+    src: url('./assets/font/HelveticaNowDisplay-Medium.ttf');
+}
+
+.HelveticaMedium {
+    font-family: 'HelveticaMedium';
+}
+
+@font-face {
+    font-family: 'HelveticaBold';
+    src: url('./assets/font/HelveticaNowDisplay-Bold.ttf');
+}
+
+.HelveticaBold {
+    font-family: 'HelveticaBold';
+}

@@ -1,0 +1,169 @@
+### User admin Registration
+POST http://localhost:3000/user/register
+Content-Type: application/json
+
+{
+    "username":"adrian",
+    "password":"test123"
+}
+### User admin Login
+POST http://localhost:3000/user/login
+Content-Type: application/json
+
+{
+    "username":"admin_test2",
+    "password":"test123"
+}
+
+### Get admin info
+GET http://localhost:3000/user/getAdmin
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluX3Rlc3QyIiwiaWF0IjoxNzcwNjgzNzk4LCJleHAiOjE3NzA3NzAxOTh9.0Afzv-yuNUsQ_qJmCM86o4lScKrPUZ5hJ94ihl9x4dI
+
+### User Logout
+POST http://localhost:3000/user/logout
+
+### Siswa Registration
+POST http://localhost:3000/authsiswa/register
+Content-Type: application/json
+
+{
+    "nis":"7142",
+    "password":"7142",
+    "nama_siswa":"I GEDE KRISHNA NANDA SUGOSA",
+    "kelas":"XII RPL 2"
+}
+
+### Siswa Login
+POST http://localhost:3000/authsiswa/login
+Content-Type: application/json
+
+{
+    "nis":"7141",
+    "password":"7141"
+}
+
+### GET siswa
+GET http://localhost:3000/siswa
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaXMiOiI3MTQxIiwiaWF0IjoxNzcwNDY4ODU1LCJleHAiOjE3NzA1NTUyNTV9.T9o9wp0Rbn-EAzAkA1wXZ1-Z6HgFC8zX26zewz8_AY4
+
+### GET Siswa Information
+GET http://localhost:3000/siswa/getsiswa
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaXMiOiI3MTQxIiwiaWF0IjoxNzcwNjE1ODU5LCJleHAiOjE3NzA3MDIyNTl9.YFvXcD-wR5yNc-tMewK7pIhLxuQXh4iZSiFpoV7N1VA
+
+### GET siswa by nis
+GET http://localhost:3000/siswa/7141
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaXMiOiI3MTQxIiwiaWF0IjoxNzcwNDY4ODU1LCJleHAiOjE3NzA1NTUyNTV9.T9o9wp0Rbn-EAzAkA1wXZ1-Z6HgFC8zX26zewz8_AY4
+
+### UPDATE siswa by nis
+PUT http://localhost:3000/siswa/update/7141
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluX3Rlc3QyIiwiaWF0IjoxNzcxODkxNTY5LCJleHAiOjE3NzE5Nzc5Njl9.7_O2s0VqjM1Df72TIS3SRpErguwx9oKFslEixrv3jh0
+Content-Type: application/json
+
+{
+    "nama_siswa":"I Putu Patris Ananda",
+    "kelas":"XII RPL 2"
+}
+
+### DELETE siswa by nis
+DELETE http://localhost:3000/siswa/delete/7142
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaXMiOiI3MTQxIiwiaWF0IjoxNzcwNDY4ODU1LCJleHAiOjE3NzA1NTUyNTV9.T9o9wp0Rbn-EAzAkA1wXZ1-Z6HgFC8zX26zewz8_AY4
+
+### SELECT ALL kategori
+GET http://localhost:3000/kategori
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaXMiOiI3MTQxIiwiaWF0IjoxNzcwNDY4ODU1LCJleHAiOjE3NzA1NTUyNTV9.T9o9wp0Rbn-EAzAkA1wXZ1-Z6HgFC8zX26zewz8_AY4
+
+### GET BY ID kategori
+GET http://localhost:3000/kategori/1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaXMiOiI3MTQxIiwiaWF0IjoxNzcwNDY4ODU1LCJleHAiOjE3NzA1NTUyNTV9.T9o9wp0Rbn-EAzAkA1wXZ1-Z6HgFC8zX26zewz8_AY4
+
+### INSERT kategori
+POST http://localhost:3000/kategori/add
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaXMiOiI3MTQxIiwiaWF0IjoxNzcwNTYwMjA0LCJleHAiOjE3NzA2NDY2MDR9.bEcM2OrOxIn50VbZDgvdLSJygQ_UAPJvQmIT66lVlKw
+Content-Type: application/json
+
+{
+    "ket_kategori":"sekolah"
+}
+
+### UPDATE kategori
+PUT http://localhost:3000//1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaXMiOiI3MTQxIiwiaWF0IjoxNzcwNDY4ODU1LCJleHAiOjE3NzA1NTUyNTV9.T9o9wp0Rbn-EAzAkA1wXZ1-Z6HgFC8zX26zewz8_AY4
+Content-Type: application/json
+
+{
+    "ket_kategori":"sarana"
+}
+
+### DELETE kategori
+DELETE http://localhost:3000/kategori/delete/5
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaXMiOiI3MTQxIiwiaWF0IjoxNzcwNDY4ODU1LCJleHAiOjE3NzA1NTUyNTV9.T9o9wp0Rbn-EAzAkA1wXZ1-Z6HgFC8zX26zewz8_AY4
+
+### SELECT ALL aspirasi
+GET http://localhost:3000/aspirasi
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaXMiOiI3MTQxIiwiaWF0IjoxNzcwNTYwMjA0LCJleHAiOjE3NzA2NDY2MDR9.bEcM2OrOxIn50VbZDgvdLSJygQ_UAPJvQmIT66lVlKw
+
+### FILTERED ASPIRASI by NIS
+GET http://localhost:3000/aspirasi/siswa
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaXMiOiI3MTQxIiwiaWF0IjoxNzcwNjE1ODU5LCJleHAiOjE3NzA3MDIyNTl9.YFvXcD-wR5yNc-tMewK7pIhLxuQXh4iZSiFpoV7N1VA
+
+### SELECT CERTAIN aspirasi
+GET http://localhost:3000/aspirasi/10
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaXMiOiI3MTQxIiwiaWF0IjoxNzcwNDY4ODU1LCJleHAiOjE3NzA1NTUyNTV9.T9o9wp0Rbn-EAzAkA1wXZ1-Z6HgFC8zX26zewz8_AY4
+
+### INSERT aspirasi
+POST http://localhost:3000/aspirasi/admin/add
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaXMiOiI3MTQxIiwiaWF0IjoxNzcwNTYwMjA0LCJleHAiOjE3NzA2NDY2MDR9.bEcM2OrOxIn50VbZDgvdLSJygQ_UAPJvQmIT66lVlKw
+Content-Type: application/json
+
+{
+    "nis":"7142",
+    "id_kategori":4,
+    "id_admin":9,
+    "lokasi":"toilet cowok lantai 3",
+    "isi_aspirasi":"Keran air mati dan tidak nyala",
+    "status":"diproses",
+    "feedback":""
+}
+
+### INSERT aspirasi by siswa
+POST http://localhost:3000/aspirasi/siswa/add
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaXMiOiI3MTQxIiwiaWF0IjoxNzcwNDY4ODU1LCJleHAiOjE3NzA1NTUyNTV9.T9o9wp0Rbn-EAzAkA1wXZ1-Z6HgFC8zX26zewz8_AY4
+Content-Type: application/json
+
+{
+    "nis":"7141",
+    "id_kategori":1,
+    "lokasi":"XII DKV 2",
+    "isi_aspirasi":"Papan tulis rusak dan tidak layak pakai"
+}
+
+### PUT aspirasi by admin
+PUT http://localhost:3000/aspirasi/admin/update/10
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaXMiOiI3MTQxIiwiaWF0IjoxNzcwNDY4ODU1LCJleHAiOjE3NzA1NTUyNTV9.T9o9wp0Rbn-EAzAkA1wXZ1-Z6HgFC8zX26zewz8_AY4
+Content-Type: application/json
+
+{
+    "nis":"7141",
+    "id_kategori":1,
+    "id_admin":1,
+    "lokasi":"XII DKV 2",
+    "isi_aspirasi":"Papan tulis rusak dan tidak layak pakai",
+    "status":"selesai",
+    "feedback":"Terimakasih atas laporannya, semoga untuk kedepannya proses pembelajarannya lebih baik"
+}
+
+### PUT aspirasi by siswa
+PUT http://localhost:3000/aspirasi/siswa/update/10
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaXMiOiI3MTQxIiwiaWF0IjoxNzcwNjE5MDM2LCJleHAiOjE3NzA3MDU0MzZ9.JEWomuln36RzXjKtEQDyfHpdEV60CFBQV7XJ36YnDKQ
+Content-Type: application/json
+
+{
+    "nis":7142,
+    "id_kategori":4,
+    "lokasi":"XII DKV 1",
+    "isi_aspirasi":"Lampu tidak bisa menyala dan rusak"
+}
+
+### DELETE aspirasi
+DELETE http://localhost:3000/aspirasi/delete/14
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaXMiOiI3MTQxIiwiaWF0IjoxNzcwNDY4ODU1LCJleHAiOjE3NzA1NTUyNTV9.T9o9wp0Rbn-EAzAkA1wXZ1-Z6HgFC8zX26zewz8_AY4
