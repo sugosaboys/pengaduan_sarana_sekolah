@@ -161,11 +161,11 @@ const paginatedPosts = computed(() =>{
                             <td scope="col" class="px-6 py-5 font-normal">{{ Aspirasi.nis }}</td>
                             <td scope="col" class="px-6 py-5 font-normal">{{ Aspirasi.nama_siswa }}</td>
                             <td scope="col" class="px-6 py-5 font-normal">{{ Aspirasi.ket_kategori }}</td>
-                            <td scope="col" class="px-6 py-5 font-normal">{{ Aspirasi.admin_username || 'admin'}}</td>
+                            <td scope="col" class="px-6 py-5 font-normal">{{ Aspirasi.admin_username || 'Belum ditugaskan'}}</td>
                             <td scope="col" class="px-6 py-5 font-normal">{{ Aspirasi.lokasi }}</td>
                             <td scope="col" class="px-6 py-5 font-normal">{{ Aspirasi.isi_aspirasi }}</td>
                             <td scope="col" class="px-6 py-5 font-normal">{{ Aspirasi.status }}</td>
-                            <td scope="col" class="px-6 py-5 font-normal">{{ Aspirasi.feedback || 'terimakasih sudah melapor!'}}</td>
+                            <td scope="col" class="px-6 py-5 font-normal">{{ Aspirasi.feedback || 'Belum ada tanggapan'}}</td>
                             <td scope="col" class="px-6 py-5 font-normal">{{ new Date(Aspirasi.created_at).toLocaleString('id-ID')  }}</td>
                             <td scope="col" class="px-6 py-5 font-normal">{{ new Date (Aspirasi.updated_at).toLocaleString('id-ID') }}</td>
                             <td scope="col" class="flex flex-col gap-3 px-6 py-5 font-normal">

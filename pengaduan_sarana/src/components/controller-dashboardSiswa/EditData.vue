@@ -92,8 +92,8 @@ async function EditData() {
                             {{ kategori.ket_kategori }}
                         </option>
                     </select>   
-                    <input type="text" placeholder="lokasi" v-model.trim="AspirasiData.lokasi" class="bg-[#D9D9D9] w-[400px] h-[50px] p-5 rounded text-black placeholder:text-black HelveticaMedium mb-5">
-                    <textarea placeholder="aspirasi" v-model.trim="AspirasiData.isi_aspirasi" class="bg-[#D9D9D9] w-[400px] p-5 rounded text-black placeholder:text-black HelveticaMedium mb-5"></textarea>
+                    <input type="text" placeholder="lokasi" v-model.trim="AspirasiData.lokasi" required class="bg-[#D9D9D9] w-[400px] h-[50px] p-5 rounded text-black placeholder:text-black HelveticaMedium mb-5">
+                    <textarea placeholder="aspirasi" v-model.trim="AspirasiData.isi_aspirasi" required class="bg-[#D9D9D9] w-[400px] p-5 rounded text-black placeholder:text-black HelveticaMedium mb-5" ></textarea>
                     <button type="submit" class="bg-black w-[400px] h-[50px]  rounded text-white HelveticaBold cursor-pointer">submit</button>
                 </div>
             </form>
