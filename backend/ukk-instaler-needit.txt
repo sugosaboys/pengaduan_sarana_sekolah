@@ -1,0 +1,72 @@
+# Instaler need
+Visual Studio Code
+Node js version v22.18.0 (LTS)
+NPM version 11.5.2
+XAMPP version 8.2.12 / PHP 8.2.12
+git base on what laptop base x32 or x64
+
+#MySQL Schema
+
+# 1.Tabel admin
+CREATE TABLE admin (
+    id_admin INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
+);
+
+# 2. Tabel kategori
+CREATE TABLE kategori (
+    id_kategori INT AUTO_INCREMENT PRIMARY KEY,
+    ket_kategori VARCHAR(50) NOT NULL UNIQUE
+);
+
+# 3. Tabel siswa
+CREATE TABLE siswa (
+    nis VARCHAR(20) PRIMARY KEY,
+    password VARCHAR(255) NOT NULL,
+    nama_siswa VARCHAR(100) NOT NULL,
+    kelas VARCHAR(20) NOT NULL
+);
+
+# 4. Tabel aspirasi
+CREATE TABLE aspirasi (
+    id_aspirasi INT AUTO_INCREMENT PRIMARY KEY,
+    nis VARCHAR(20) NOT NULL,
+    id_kategori INT NOT NULL,
+    id_admin INT NULL,
+    lokasi VARCHAR(100),
+    isi_aspirasi TEXT NOT NULL,
+    status ENUM('menunggu', 'diproses', 'selesai', 'ditolak') DEFAULT 'menunggu',
+    feedback TEXT,  
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (nis) REFERENCES siswa(nis),
+    FOREIGN KEY (id_kategori) REFERENCES kategori(id_kategori),
+    FOREIGN KEY (id_admin) REFERENCES admin(id_admin)
+);
+
+#Documentation
+https://github.com/sugosaboys/pengaduan_sarana_sekolah
+
+#.env file
+
+## backend
+PORT = 3000
+
+## Database configuration
+DB_HOST = localhost
+DB_USER = root
+DB_NAME = we_sarana_sekolah
+
+## Secret Key
+SECRET_KEY = any_Random_String_Here
+
+#Backend Folder Depedencies
+npm install bcrypt cookie-parser cors dotenv express express-validator jsonwebtoken mysql2 && npm install --save-dev nodemon
+
+#frontend with name folder pengaduan_sarana
+npm create vite@latest
+
+#Frontend Folder Depedencies
+npm install tailwindcss @tailwindcss/vite
+npm install axios vue-awesome-paginate vue-router vue-toast-notification
