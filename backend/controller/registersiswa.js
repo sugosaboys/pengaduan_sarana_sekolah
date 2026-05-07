@@ -31,7 +31,7 @@ exports.registersiswa = async (req,res) => {
                             process.env.SECRET_KEY,
                             {expiresIn: '24h'}
                     )
-                    res.status(200).send({message: "User registered successfully"});
+                    res.status(200).send({message: "User registered successfully" ,token:token});
                 } catch (error) {
                     console.error(error);
                     return res.status(500).json({error:"Database error"});

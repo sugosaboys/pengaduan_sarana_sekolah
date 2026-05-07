@@ -3,7 +3,7 @@ POST http://localhost:3000/user/register
 Content-Type: application/json
 
 {
-    "username":"adrian",
+    "username":"timoti",
     "password":"test123"
 }
 ### User admin Login
@@ -48,7 +48,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaXMiOiI3MTQxIiwiaWF0Ijox
 
 ### GET Siswa Information
 GET http://localhost:3000/siswa/getsiswa
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaXMiOiI3MTQxIiwiaWF0IjoxNzcwNjE1ODU5LCJleHAiOjE3NzA3MDIyNTl9.YFvXcD-wR5yNc-tMewK7pIhLxuQXh4iZSiFpoV7N1VA
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluX3Rlc3QyIiwiaWF0IjoxNzc2MzEyNjU3LCJleHAiOjE3NzYzOTkwNTd9.mOYaltq5yP7dB7suSb-XKo6v2gTUnWFL1cGuLyGoO8k
 
 ### GET siswa by nis
 GET http://localhost:3000/siswa/7141
@@ -100,7 +100,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaXMiOiI3MTQxIiwiaWF0Ijox
 
 ### SELECT ALL aspirasi
 GET http://localhost:3000/aspirasi
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaXMiOiI3MTQxIiwiaWF0IjoxNzcwNTYwMjA0LCJleHAiOjE3NzA2NDY2MDR9.bEcM2OrOxIn50VbZDgvdLSJygQ_UAPJvQmIT66lVlKw
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluX3Rlc3QyIiwiaWF0IjoxNzc2MzEyNjU3LCJleHAiOjE3NzYzOTkwNTd9.mOYaltq5yP7dB7suSb-XKo6v2gTUnWFL1cGuLyGoO8k
 
 ### FILTERED ASPIRASI by NIS
 GET http://localhost:3000/aspirasi/siswa

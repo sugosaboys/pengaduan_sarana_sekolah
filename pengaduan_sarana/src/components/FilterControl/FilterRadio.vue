@@ -7,7 +7,7 @@
 </script>
 
 <template>
-    <div class="flex">
+    <div class="flex md:flex-col lg:flex-row">
         <label class="flex mr-4 items-center flex-nowrap">
             <input type="radio" name="show" value="all" checked @change="filter">
             <span class="whitespace-nowrap ml-1 HelveticaBold">Show All</span>

@@ -25,7 +25,7 @@ const filter = (e) => {
             <img src="/assets/icon/Filter-icon.png" alt="Filter" loading="lazy" class="w-[12px]">
             Filter
         </button>
-        <div v-if="show" class="absolute top-16 right-0 z-10 w-48 p-3 bg-white rounded-lg shadow">
+        <div :class="['absolute top-16 right-0 z-10 w-48 p-3 bg-white rounded-lg shadow', show ? 'block' : 'hidden']">
             <h6 class="mb-3 text-sm font-medium text-gray-900">Status</h6>
             <ul class="space-y-2 text-sm">
                 <li v-for="(status, index) in statususes" class="flex gap-2 HelveticaBold">

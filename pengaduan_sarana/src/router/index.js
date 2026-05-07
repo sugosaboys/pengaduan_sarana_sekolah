@@ -1,20 +1,20 @@
 import { createRouter , createWebHistory } from "vue-router";
 
-import LoginSiswa from "../view/LoginSiswa.vue";
-import LoginAdmin from "../view/LoginAdmin.vue";
-import DashboardSiswa from "../view/DashboardSiswa.vue";
-import DashboardAdmin from "../view/DashboardAdmin.vue";
-import AddAspirasiSiswaView from "../view/AddAspirasiSiswaView.vue";
-import EditAspirasiView from "../view/EditAspirasiView.vue";
-import HistoryPengaduanView from "../view/HistoryPengaduanView.vue";
-import EditAspirasiAdminView from "../view/EditAspirasiAdminView.vue";
-import DashboardKategoriAdminView from "../view/DashboardKategoriAdminView.vue";
-import AddKategoriAdminView from "../view/AddKategoriAdminView.vue";
-import EditKategoriAdminView from "../view/EditKategoriAdminView.vue";
-import DashboardSiswaAdminView from "../view/DashboardSiswaAdminView.vue";
-import AddSiswaAdminView from "../view/AddSiswaAdminView.vue";
-import EditSiswaAdminView from "../view/EditSIswaAdminView.vue";
-import NotFoundPageView from "../view/404pageView.vue";
+import LoginSiswa from "@/view/LoginSiswa.vue";
+import LoginAdmin from "@/view/LoginAdmin.vue";
+import DashboardSiswa from "@/view/DashboardSiswa.vue";
+import DashboardAdmin from "@/view/DashboardAdmin.vue";
+import AddAspirasiSiswaView from "@/view/AddAspirasiSiswaView.vue";
+import EditAspirasiView from "@/view/EditAspirasiView.vue";
+import HistoryPengaduanView from "@/view/HistoryPengaduanView.vue";
+import EditAspirasiAdminView from "@/view/EditAspirasiAdminView.vue";
+import DashboardKategoriAdminView from "@/view/DashboardKategoriAdminView.vue";
+import AddKategoriAdminView from "@/view/AddKategoriAdminView.vue";
+import EditKategoriAdminView from "@/view/EditKategoriAdminView.vue";
+import DashboardSiswaAdminView from "@/view/DashboardSiswaAdminView.vue";
+import AddSiswaAdminView from "@/view/AddSiswaAdminView.vue";
+import EditSiswaAdminView from "@/view/EditSIswaAdminView.vue";
+import NotFoundPageView from "@/view/404pageView.vue";
 
 const routes = [
     {
@@ -147,30 +147,44 @@ export const router = createRouter({
     routes,
 });
 
-router.beforeEach((to,from,next)=>{
-    if(to.meta.requireAuth){
+function isTokenExpired(token) {
+  try {
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    const now = Math.floor(Date.now() / 1000);
+    return payload.exp < now;
+  } catch (e) {
+    return true;
+  }
+}
 
-        if(to.meta.authType === 'admin'){
-            if(localStorage.getItem('admin_token')){
-                next();
-            }else{          
-                next('/login-admin')
-            }
-            return;
-        }
+router.beforeEach((to, from, next) => {
+  if (to.meta.requireAuth) {
 
-        if(to.meta.authType === 'siswa'){
-            if(localStorage.getItem('Authorization')){
-                next();
-            }else{          
-                next('/login-siswa')
-            }
-            return;
-        }
-
-    }else{
+    if (to.meta.authType === 'admin') {
+      const token = localStorage.getItem('admin_token');
+      if (token && !isTokenExpired(token)) {
         next();
+      } else {
+        localStorage.removeItem('admin_token'); // clean up expired token
+        next('/login-admin');
+      }
+      return;
     }
+
+    if (to.meta.authType === 'siswa') {
+      const token = localStorage.getItem('Authorization');
+      if (token && !isTokenExpired(token)) {
+        next();
+      } else {
+        localStorage.removeItem('Authorization'); // clean up expired token
+        next('/login-siswa');
+      }
+      return;
+    }
+
+  } else {
+    next();
+  }
 });
 
 export default router;
