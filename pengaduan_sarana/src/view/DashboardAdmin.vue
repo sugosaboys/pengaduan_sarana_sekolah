@@ -2,6 +2,7 @@
 import axios from "axios";
 import { computed, onMounted, ref } from "vue";
 import { useToast } from "vue-toast-notification";
+import { useAdminStore } from '@/stores/adminStore';
 import Sidebar from "@/components/controller-adminPanel/sidebar.vue";
 import searchfield from "@/components/FilterControl/searchfield.vue";
 import FilterRadio from "@/components/FilterControl/FilterRadio.vue";
@@ -16,21 +17,7 @@ const toast = useToast();
 const currentPage = ref(1);
 const itemsPerPage = ref(5);
 
-const AdminInfo = { username: "" };
-
-//Get admin info
-async function getAdminInfo() {
-  try {
-    const res = await axios.get("/api/user/getAdmin", {
-      headers: {
-        Authorization: localStorage.getItem("admin_token") || "",
-      },
-    });
-    AdminInfo.username = res.data.username;
-  } catch (error) {
-    console.log("Error to fetch data", error);
-  }
-}
+const adminStore = useAdminStore();
 
 //Get Aspirasi data
 async function getAspirasiData() {
@@ -48,7 +35,7 @@ async function getAspirasiData() {
 }
 
 onMounted(() => {
-  getAdminInfo();
+  adminStore.getAdminInfo();
   getAspirasiData();
 });
 
@@ -143,7 +130,7 @@ const paginatedPosts = computed(() => {
         loading="lazy"
         class="w-[24px]"
       />
-      <h4 class="truncate">{{ AdminInfo.username }}</h4>
+      <h4 class="truncate">{{ adminStore.username }}</h4>
     </span>
   </div>
   <div class="md:ml-64 mt-24 md:mt-16">

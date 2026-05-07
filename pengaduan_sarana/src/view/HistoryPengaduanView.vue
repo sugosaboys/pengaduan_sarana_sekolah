@@ -1,13 +1,14 @@
 <script setup>
 import axios from "axios";
 import { ref, computed, onMounted } from "vue";
+import { useToast } from "vue-toast-notification";
+import { useformatdate } from "@/composables/useformatdate";
+import { useSiswaStore } from "@/stores/siswaStore";
 import router from "@/router";
 import sidebar from "@/components/sidebar.vue";
 import searchfield from "@/components/FilterControl/searchfield.vue";
 import FilterRadio from "@/components/FilterControl/FilterRadio.vue";
 import FilterDropdown from "@/components/FilterControl/FilterDropdown.vue";
-import { useToast } from "vue-toast-notification";
-import { useformatdate } from "@/composables/useformatdate";
 import AspirasiPopup from "@/components/controller-dashboardSiswa/AspirasiPopup.vue";
 
 const toast = useToast();
@@ -21,25 +22,7 @@ const StatususeFilter = ref([]);
 const currentPage = ref(1);
 const itemsPerPage = ref(10);
 
-const SiswaInfo = {
-  nis: "",
-  nama_siswa: "",
-};
-//get siswa info
-async function getSiswaInfo() {
-  try {
-    const res = await axios.get("/api/siswa/getsiswa", {
-      headers: {
-        Authorization: localStorage.getItem("Authorization") || "",
-      },
-    });
-    SiswaInfo.nis = res.data.nis;
-    SiswaInfo.nama_siswa = res.data.nama_siswa;
-  } catch (error) {
-    console.error("Error fetching siswa data:", error);
-  }
-}
-
+const SiswaInfoStore = useSiswaStore();
 //get data aspirasi
 async function getAspirasiData() {
   try {
@@ -56,7 +39,7 @@ async function getAspirasiData() {
 }
 
 onMounted(() => {
-  getSiswaInfo();
+  SiswaInfoStore.getSiswaInfo();
   getAspirasiData();
 });
 
@@ -158,8 +141,8 @@ async function ViewAspirasiDetails(id) {
         loading="lazy"
         class="w-[24px]"
       />
-      <h4 class="truncate">{{ SiswaInfo.nama_siswa }}</h4>
-      <h4 class="truncate">{{ SiswaInfo.nis }}</h4>
+      <h4 class="truncate">{{ SiswaInfoStore.nama_siswa }}</h4>
+      <h4 class="truncate">{{ SiswaInfoStore.nis }}</h4>
     </span>
   </header>
   <section class="md:ml-64 mt-24 md:mt-16">

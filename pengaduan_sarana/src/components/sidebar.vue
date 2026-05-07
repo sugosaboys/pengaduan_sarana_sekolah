@@ -1,6 +1,9 @@
 <script setup>
 import { useRoute } from 'vue-router';
+import { useSiswaStore } from '@/stores/siswaStore';
 import router from '../router';
+
+const SiswaInfoStore = useSiswaStore();
 
 const isRouteActive = (RoutePath)=>{
     const router = useRoute();
@@ -9,6 +12,7 @@ const isRouteActive = (RoutePath)=>{
 //logout
 function logout(){
     localStorage.removeItem('Authorization');
+    SiswaInfoStore.ClearSiswaInfo();
     router.push('/login-siswa');
 }
 </script>

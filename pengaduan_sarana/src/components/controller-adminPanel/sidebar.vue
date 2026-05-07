@@ -1,6 +1,9 @@
 <script setup>
 import { useRoute } from 'vue-router';
+import { useAdminStore } from '@/stores/adminStore';
 import router from '../../router/index';
+
+const adminStore = useAdminStore();
 
 const isRouteActive = (RoutePath)=>{
     const router = useRoute();
@@ -9,6 +12,7 @@ const isRouteActive = (RoutePath)=>{
 //logout
 function logout(){
     localStorage.removeItem('admin_token');
+    adminStore.ClearAdminInfo();
     router.push('/login-admin');
 }
 </script>   

@@ -1,9 +1,10 @@
 <script setup>
 import axios from "axios";
 import { computed, onMounted, ref } from "vue";
+import { useToast } from "vue-toast-notification";
+import { useAdminStore } from '@/stores/adminStore';
 import router from "@/router/index";
 import Sidebar from "@/components/controller-adminPanel/sidebar.vue";
-import { useToast } from "vue-toast-notification";
 import searchfield from "@/components/FilterControl/searchfield.vue";
 
 const toast = useToast();
@@ -13,21 +14,7 @@ const SiswaData = ref([]);
 const currentPage = ref(1);
 const itemsPerPage = ref(10);
 
-const AdminInfo = { username: "" };
-
-//Get admin info
-async function getAdminInfo() {
-  try {
-    const res = await axios.get("/api/user/getAdmin", {
-      headers: {
-        Authorization: localStorage.getItem("admin_token") || "",
-      },
-    });
-    AdminInfo.username = res.data.username;
-  } catch (error) {
-    console.log("Error to fetch data", err);
-  }
-}
+const adminStore = useAdminStore();
 
 //Get Siswa data
 async function getSiswaData() {
@@ -45,7 +32,7 @@ async function getSiswaData() {
 }
 
 onMounted(() => {
-  getAdminInfo();
+  adminStore.getAdminInfo();
   getSiswaData();
 });
 
@@ -102,7 +89,7 @@ const paginatedPosts = computed(() => {
         loading="lazy"
         class="w-[24px]"
       />
-      <h4 class="truncate">{{ AdminInfo.username }}</h4>
+      <h4 class="truncate">{{ adminStore.username }}</h4>
     </span>
   </div>
   <div
