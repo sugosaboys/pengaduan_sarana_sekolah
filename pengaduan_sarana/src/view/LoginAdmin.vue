@@ -21,6 +21,12 @@ async function loginAdmin() {
     router.push("/admin");
     toast.success("Login successfuly!");
   } catch (error) {
+    if(error.response?.status === 429){
+      const retryAfter = error.response.headers['retry-after'];
+      const minutes = Math.ceil(retryAfter / 60);
+      toast.error(`Too many attempts. Try again in ${minutes} minute(s).`);
+      return;
+    }
     toast.error("Make sure your username and password are correct.");
   }
 }

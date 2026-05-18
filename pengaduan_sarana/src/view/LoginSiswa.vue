@@ -21,6 +21,12 @@ async function LoginSiswa() {
     router.push("/");
     toast.success("Login successfull!");
   } catch (error) {
+    if(error.response?.status === 429){
+      const retryAfter = error.response.headers['retry-after'];
+      const minutes = Math.ceil(retryAfter / 60);
+      toast.error(`Too many attempts. Try again in ${minutes} minute(s).`);
+      return;
+    }
     toast.error("Make sure your nis and password are correct.");
   }
 }
