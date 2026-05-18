@@ -22,11 +22,7 @@ const adminStore = useAdminStore();
 //Get Aspirasi data
 async function getAspirasiData() {
   try {
-    const res = await axios.get("/api/aspirasi", {
-      headers: {
-        Authorization: localStorage.getItem("admin_token") || "",
-      },
-    });
+    const res = await axios.get("/api/aspirasi");
     AspirasiData.value = res.data;
     //console.log(AspirasiData.value);
   } catch (error) {
@@ -43,11 +39,7 @@ async function deleteAspirasi(params) {
   try {
     const confirm = window.confirm("Kamu yakin ingin menghapus aspirasi ini?.");
     if (confirm) {
-      await axios.delete(`/api/aspirasi/delete/${params}`, {
-        headers: {
-          Authorization: localStorage.getItem("admin_token") || "",
-        },
-      });
+      await axios.delete(`/api/aspirasi/delete/${params}`);
       getAspirasiData();
       toast.success("Aspirasi Berhasil Dihapus!.");
     }
@@ -209,7 +201,7 @@ const paginatedPosts = computed(() => {
         </span>
       </div>
     </div>
-    <div class="flex justify-center px-4 py-4 md:py-6 pb-20 md:pb-0">
+    <div class="flex justify-center px-4 py-4 md:py-6 pb-20 md:pb-8">
       <VueAwesomePaginate
         :totalItems="FilteredData.length"
         :itemsPerPage="itemsPerPage"

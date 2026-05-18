@@ -18,11 +18,7 @@ const adminStore = useAdminStore();
 //Get Kategori data
 async function getKategoriData() {
   try {
-    const res = await axios.get("/api/kategori", {
-      headers: {
-        Authorization: localStorage.getItem("admin_token") || "",
-      },
-    });
+    const res = await axios.get("/api/kategori");
     KategoriData.value = res.data;
     //console.log(KategoriData.value);
   } catch (error) {
@@ -39,11 +35,7 @@ async function deleteKategori(params) {
   try {
     const confirm = window.confirm("Kamu yakin ingin menghapus Kategori ini?.");
     if (confirm) {
-      await axios.delete(`/api/kategori/delete/${params}`, {
-        headers: {
-          Authorization: localStorage.getItem("admin_token") || "",
-        },
-      });
+      await axios.delete(`/api/kategori/delete/${params}`);
       getKategoriData();
       toast.success("Kategori Berhasil Dihapus!.");
     }

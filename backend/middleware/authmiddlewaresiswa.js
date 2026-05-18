@@ -3,7 +3,7 @@ const cookieParser = require('cookie-parser');
 
 module.exports = (req, res, next) => {
     try {
-        const token = req.cookies.admin_token;
+        const token = req.cookies.siswa_token;
         if(!token){
             return res.status(403).json({message:'access denied'});
         }

@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const db = require('../config/db');
 const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser');
 
 exports.loginsiswa = async (req,res)=>{
     const {nis, password} = req.body;
@@ -21,10 +22,19 @@ exports.loginsiswa = async (req,res)=>{
                         process.env.SECRET_KEY,
                         {expiresIn: '24h'}
                     );
-                    res.status(200).json({
-                        message:"Siswa signed in!",
-                        token:token,
+                    res.cookie('siswa_token',token, {
+                       httpOnly: true,
+                       secure: process.env.NODE_ENV === 'production', 
+                       sameSite: process.env.NODE_ENV === 'production' ? 'Strict' : 'Lax',
+                       maxAge: 24 * 60 * 60 * 1000,
                     });
+                    res.clearCookie('admin_token', {
+                        httpOnly: true,
+                        secure: process.env.NODE_ENV === 'production', 
+                        sameSite: process.env.NODE_ENV === 'production' ? 'Strict' : 'Lax',
+                        maxAge: 0,
+                    });
+                    res.status(200).json({ message:"Siswa signed in!" });
                 }else{
                     if(result != true)
                     res.status(400).json({error:"Enter correct password!"});

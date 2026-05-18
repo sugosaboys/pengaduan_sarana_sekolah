@@ -2,7 +2,7 @@
 import axios from "axios";
 import { ref, computed, onMounted } from "vue";
 import { useToast } from "vue-toast-notification";
-import { useformatdate } from "@/composables/useformatdate";
+import { useformatdate } from "@/composables/useformatdate"; 
 import { useSiswaStore } from "@/stores/siswaStore";
 import router from "@/router";
 import sidebar from "@/components/sidebar.vue";
@@ -26,11 +26,7 @@ const SiswaInfoStore = useSiswaStore();
 //get data aspirasi
 async function getAspirasiData() {
   try {
-    const res = await axios.get("/api/aspirasi/siswa", {
-      headers: {
-        Authorization: localStorage.getItem("Authorization") || "",
-      },
-    });
+    const res = await axios.get("/api/aspirasi/siswa");
     AspirasiData.value = res.data;
     //console.log(AspirasiData.value);
   } catch (error) {
@@ -47,11 +43,7 @@ async function deleteAspirasi(params) {
   try {
     const confrim = window.confirm("Kamu yakin ingin menghapus aspirasi ini?.");
     if (confrim) {
-      await axios.delete(`/api/aspirasi/delete/${params}`, {
-        headers: {
-          Authorization: localStorage.getItem("Authorization") || "",
-        },
-      });
+      await axios.delete(`/api/aspirasi/siswa/delete/${params}`);
       getAspirasiData();
       toast.success("Aspirasi berhasil dihapus");
     }

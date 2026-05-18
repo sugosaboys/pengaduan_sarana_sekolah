@@ -11,7 +11,7 @@ const AuthMiddleware = require('../middleware/authmiddleware');
 
 router.get('/getAdmin',async (req,res) => {
     try {
-        let token = req.headers.authorization;
+        let token = req.cookies.admin_token;
         if(!token){
             return res.status(401).json({error: 'No token provided, Unauthorized access!'});
         }

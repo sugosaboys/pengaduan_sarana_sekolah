@@ -18,11 +18,7 @@ const SiswaData = ref({
 
 onMounted(async () => {
   try {
-    const res = await axios.get(`/api/siswa/${NIS}`, {
-      headers: {
-        Authorization: localStorage.getItem("admin_token") || "",
-      },
-    });
+    const res = await axios.get(`/api/siswa/${NIS}`);
     SiswaData.value = {
       nama_siswa: res.data.nama_siswa,
       kelas: res.data.kelas,
@@ -39,11 +35,7 @@ async function EditData() {
     return;
   }
   try {
-    await axios.put(`/api/siswa/update/${NIS}`, SiswaData.value, {
-      headers: {
-        Authorization: localStorage.getItem("admin_token") || "",
-      },
-    });
+    await axios.put(`/api/siswa/update/${NIS}`, SiswaData.value);
     toast.success("Siswa berhasil diperbarui");
     router.push("/admin/kelola/siswa");
   } catch (error) {

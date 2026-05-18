@@ -18,11 +18,7 @@ const AspirasiData = ref({
 //get nis info
 async function GetSiswaNIS() {
   try {
-    const res = await axios.get("/api/siswa/getsiswa", {
-      headers: {
-        Authorization: localStorage.getItem("Authorization") || "",
-      },
-    });
+    const res = await axios.get("/api/siswa/getsiswa");
     AspirasiData.value.nis = res.data.nis;
   } catch (error) {
     console.error("Error fetching siswa data:", err);
@@ -32,11 +28,7 @@ async function GetSiswaNIS() {
 //get kategori info
 async function GetKategoriList() {
   try {
-    const res = await axios.get("/api/kategori", {
-      headers: {
-        Authorization: localStorage.getItem("Authorization") || "",
-      },
-    });
+    const res = await axios.get("/api/kategori/siswa");
     KategoriList.value = res.data;
   } catch (error) {
     console.error("Error fetching kategori data:", error);
@@ -59,11 +51,7 @@ async function submitData() {
     return;
   }
   try {
-    await axios.post("/api/aspirasi/siswa/add", AspirasiData.value, {
-      headers: {
-        Authorization: localStorage.getItem("Authorization") || "",
-      },
-    });
+    await axios.post("/api/aspirasi/siswa/add", AspirasiData.value);
     router.push("/");
     toast.success("Aduan berhasil diajukan!");
   } catch (error) {

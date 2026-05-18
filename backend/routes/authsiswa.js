@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { registersiswa } = require('../controller/registersiswa');
 const { loginsiswa } = require('../controller/loginsiswa');
-const { logout} = require('../controller/logout');
+const { logoutsiswa } = require('../controller/logoutsiswa');
 const { check } = require('express-validator');
 const Validate = require('../middleware/validate');
 
@@ -38,6 +38,6 @@ router.post('/login',
     loginsiswa
 );
 
-router.post('/logout', logout);
+router.post('/logout', logoutsiswa);
 
 module.exports = router;

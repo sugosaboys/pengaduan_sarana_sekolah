@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../config/db');
 const AuthMiddleware = require('../middleware/authmiddleware');
+const AuthMiddlewareSiswa = require('../middleware/authmiddlewaresiswa');
 
 router.get('/',AuthMiddleware,async (req,res) => {
     try {
@@ -32,7 +33,38 @@ router.get('/',AuthMiddleware,async (req,res) => {
     }
 });
 
-router.get('/siswa',AuthMiddleware,async(req,res)=>{
+//all aspirasi siswa endpoint
+router.get('/siswaview',AuthMiddlewareSiswa,async (req,res) => {
+    try {
+        const [aspirasi] = await db.query(`
+            SELECT 
+            a.id_aspirasi, 
+            a.nis,
+            s.nama_siswa, 
+            a.id_kategori,
+            k.ket_kategori,
+            a.id_admin,
+            ad.username AS admin_username,
+            a.lokasi, 
+            a.isi_aspirasi,
+            a.status,
+            a.feedback,
+            a.created_at,
+            a.updated_at
+            FROM aspirasi a
+            INNER JOIN siswa s ON a.nis = s.nis
+            INNER JOIN kategori k ON a.id_kategori = k.id_kategori
+            LEFT JOIN admin ad ON a.id_admin = ad.id_admin
+            ORDER BY a.created_at DESC
+        `);
+        res.status(200).json(aspirasi);
+    } catch (error) {
+        res.status(500).json({error: error.message});
+    }
+});
+
+//history aspirasi siswa endpoint
+router.get('/siswa',AuthMiddlewareSiswa,async(req,res)=>{
     try {
         const nis = req.user.nis;
         const [rows] = await db.query(`
@@ -94,6 +126,38 @@ router.get('/:id_aspirasi',AuthMiddleware,async (req,res) => {
     }
 });
 
+router.get('/siswa/:id_aspirasi',AuthMiddlewareSiswa,async (req,res) => {
+    try {
+        const { id_aspirasi } = req.params;
+        const nis = req.user.nis;
+        const [rows] = await db.query(`
+            SELECT 
+            a.id_aspirasi, 
+            a.nis,
+            s.nama_siswa, 
+            a.id_kategori,
+            k.ket_kategori,
+            a.id_admin,
+            ad.username AS admin_username,
+            a.lokasi, 
+            a.isi_aspirasi,
+            a.status,
+            a.feedback,
+            a.created_at,
+            a.updated_at
+            FROM aspirasi a
+            INNER JOIN siswa s ON a.nis = s.nis
+            INNER JOIN kategori k ON a.id_kategori = k.id_kategori
+            LEFT JOIN admin ad ON a.id_admin = ad.id_admin
+            WHERE a.id_aspirasi = ? AND a.nis = ?
+        `
+        ,[id_aspirasi,nis]);
+        res.status(200).json(rows[0]);
+    } catch (error) {
+        res.status(500).json({error: 'No aspirasi with that ID'});
+    }
+});
+
 router.post('/admin/add',AuthMiddleware,async (req,res) =>{
     try {
         const { nis,id_kategori,id_admin,lokasi,isi_aspirasi,status,feedback } = req.body;
@@ -109,7 +173,7 @@ router.post('/admin/add',AuthMiddleware,async (req,res) =>{
     }
 });
 
-router.post('/siswa/add',AuthMiddleware,async (req,res) =>{
+router.post('/siswa/add',AuthMiddlewareSiswa,async (req,res) =>{
     try {
         const { nis,id_kategori,lokasi,isi_aspirasi } = req.body;
         await db.query(`INSERT INTO aspirasi (nis,id_kategori,lokasi,isi_aspirasi) VALUES (?,?,?,?)`,[nis,id_kategori,lokasi,isi_aspirasi]);
@@ -141,7 +205,7 @@ router.put('/admin/update/:id_aspirasi',AuthMiddleware,async (req,res) => {
     }
 });
 
-router.put('/siswa/update/:id_aspirasi',AuthMiddleware,async (req,res) => {
+router.put('/siswa/update/:id_aspirasi',AuthMiddlewareSiswa,async (req,res) => {
     try {
         const AspirasiID = req.params.id_aspirasi;
         const { nis, id_kategori , lokasi , isi_aspirasi } = req.body;
@@ -159,6 +223,16 @@ router.put('/siswa/update/:id_aspirasi',AuthMiddleware,async (req,res) => {
 });
 
 router.delete('/delete/:id_aspirasi',AuthMiddleware,async (req,res) => {
+    try {
+        const AspirasiID = req.params.id_aspirasi;
+        await db.query(`DELETE FROM aspirasi WHERE id_aspirasi = ?`,[AspirasiID]);
+        res.status(200).json({message:'1 aspirasi deleted successfuly'});
+    } catch (error) {
+        res.status(500).json({error: 'Failed to delete aspirasi'});
+    }
+});
+
+router.delete('/siswa/delete/:id_aspirasi',AuthMiddlewareSiswa,async (req,res) => {
     try {
         const AspirasiID = req.params.id_aspirasi;
         await db.query(`DELETE FROM aspirasi WHERE id_aspirasi = ?`,[AspirasiID]);

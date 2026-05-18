@@ -26,11 +26,7 @@ onMounted(() => {
 
 async function GetAspirasiByID(params) {
   try {
-    const res = await axios.get(`/api/aspirasi/${IDaspirasi}`, {
-      headers: {
-        Authorization: localStorage.getItem("Authorization") || "",
-      },
-    });
+    const res = await axios.get(`/api/aspirasi/siswa/${IDaspirasi}`);
     AspirasiData.value = {
       nis: res.data.nis,
       id_kategori: res.data.id_kategori,
@@ -45,11 +41,7 @@ async function GetAspirasiByID(params) {
 
 async function GetKategoriList() {
   try {
-    const res = await axios.get("/api/kategori", {
-      headers: {
-        Authorization: localStorage.getItem("Authorization") || "",
-      },
-    });
+    const res = await axios.get("/api/kategori/siswa");
     KategoriList.value = res.data;
   } catch (error) {
     console.error("Error fetching siswa data:", error);
@@ -69,12 +61,7 @@ async function EditData() {
   try {
     await axios.put(
       `/api/aspirasi/siswa/update/${IDaspirasi}`,
-      AspirasiData.value,
-      {
-        headers: {
-          Authorization: localStorage.getItem("Authorization") || "",
-        },
-      },
+      AspirasiData.value
     );
     toast.success("Aspirasi berhasil diperbarui");
     router.push("/history/aspirasi");

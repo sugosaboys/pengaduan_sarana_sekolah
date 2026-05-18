@@ -19,11 +19,7 @@ const adminStore = useAdminStore();
 //Get Siswa data
 async function getSiswaData() {
   try {
-    const res = await axios.get("/api/siswa", {
-      headers: {
-        Authorization: localStorage.getItem("admin_token") || "",
-      },
-    });
+    const res = await axios.get("/api/siswa");
     SiswaData.value = res.data;
     //console.log(SiswaData.value);
   } catch (error) {
@@ -40,11 +36,7 @@ async function deleteSiswa(params) {
   try {
     const confirm = window.confirm("Kamu yakin ingin menghapus Siswa ini?.");
     if (confirm) {
-      await axios.delete(`/api/siswa/delete/${params}`, {
-        headers: {
-          Authorization: localStorage.getItem("admin_token") || "",
-        },
-      });
+      await axios.delete(`/api/siswa/delete/${params}`);
       getSiswaData();
       toast.success("Siswa Berhasil Dihapus!.");
     }
@@ -151,7 +143,7 @@ const paginatedPosts = computed(() => {
         </span>
       </div>
     </div>
-    <div class="flex justify-center px-4 py-4 md:py-6 pb-20 md:pb-0">
+    <div class="flex justify-center px-4 py-4 md:py-6 pb-20 md:pb-8">
       <VueAwesomePaginate
         v-if="FilteredData.length > itemsPerPage"
         :totalItems="FilteredData.length"

@@ -1,4 +1,5 @@
 <script setup>
+import axios from "axios";
 import { useRoute } from 'vue-router';
 import { useAdminStore } from '@/stores/adminStore';
 import router from '../../router/index';
@@ -10,9 +11,9 @@ const isRouteActive = (RoutePath)=>{
     return router.path === RoutePath
 }
 //logout
-function logout(){
-    localStorage.removeItem('admin_token');
-    adminStore.ClearAdminInfo();
+async function logout(){
+    await axios.post('/api/user/logout');
+    adminStore.clearAdminInfo();
     router.push('/login-admin');
 }
 </script>   
@@ -23,7 +24,7 @@ function logout(){
         <div class="flex flex-col h-full px-3 py-4 overflow-y-auto">
             <span class="border-b border-gray-300 flex items-center w-full gap-2 py-2 mb-2">
                 <img src="/assets/login-logo.png" alt="logo" loading="lazy" class="w-[42px] object-cover">
-                <h2 class="HelveticaBold">Pengaduan sarana.</h2>
+                <h1 class="HelveticaBold">Pengaduan sarana.</h1>
             </span>
 
             <ul class="flex flex-col h-full mt-6 HelveticaMedium">

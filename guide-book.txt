@@ -48,7 +48,7 @@ CREATE TABLE aspirasi (
 #Documentation
 https://github.com/sugosaboys/pengaduan_sarana_sekolah
 
-#.env file
+#.env file in backend folders
 
 ## backend
 PORT = 3000
@@ -70,3 +70,7 @@ npm create vite@latest
 #Frontend Folder Depedencies
 npm install tailwindcss @tailwindcss/vite
 npm install axios vue-awesome-paginate vue-router vue-toast-notification
+
+.env in pengaduan_sarana folders
+
+VITE_API_URL=http://localhost:3000

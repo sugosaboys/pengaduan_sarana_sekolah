@@ -6,7 +6,7 @@ const AuthMiddleware = require('../middleware/authmiddleware');
 
 router.get('/getsiswa',async (req,res) => {
     try {
-        let token = req.headers.authorization;
+        let token = req.cookies.siswa_token;
         if(!token){
             return res.status(401).json({error: 'No token provided, Unauthorized access!'});
         }

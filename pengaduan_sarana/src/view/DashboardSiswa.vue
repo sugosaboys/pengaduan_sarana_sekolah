@@ -24,11 +24,7 @@ const SiswaInfoStore = useSiswaStore();
 //get data aspirasi
 async function getAspirasiData() {
   try {
-    const res = await axios.get("/api/aspirasi", {
-      headers: {
-        Authorization: localStorage.getItem("Authorization") || "",
-      },
-    });
+    const res = await axios.get("/api/aspirasi/siswaview");
     AspirasiData.value = res.data;
     //console.log(AspirasiData.value);
   } catch (error) {

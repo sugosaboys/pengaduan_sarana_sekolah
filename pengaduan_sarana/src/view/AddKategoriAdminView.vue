@@ -15,11 +15,7 @@ async function SubmitData() {
     return;
   }
   try {
-    await axios.post("/api/kategori/add", KategoriData.value, {
-      headers: {
-        Authorization: localStorage.getItem("admin_token") || "",
-      },
-    });
+    await axios.post("/api/kategori/add", KategoriData.value);
     toast.success("Kategori berhasil ditambahkan!");
     router.push("/admin/kelola/kategori");
   } catch (error) {

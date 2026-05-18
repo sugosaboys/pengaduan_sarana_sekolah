@@ -1,4 +1,7 @@
 import { createRouter , createWebHistory } from "vue-router";
+import { useAdminStore } from "@/stores/adminStore";
+import { useSiswaStore } from "@/stores/siswaStore"
+import axios from "axios";
 
 import LoginSiswa from "@/view/LoginSiswa.vue";
 import LoginAdmin from "@/view/LoginAdmin.vue";
@@ -51,6 +54,22 @@ const routes = [
         meta:{
             requireAuth:true,
             authType:'siswa'
+        },
+        beforeEnter: async (to, from, next) => {
+        try {
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/aspirasi/siswa/${to.params.id_aspirasi}`)
+            const data = response.data
+
+            const editableStatuses = ['menunggu'];
+
+            if (!editableStatuses.includes(data.status)) {
+                next({ name: 'HistoryAspirasi' })
+            } else { 
+                next()
+            }
+        } catch (error) {
+            next({ name: 'NotFound' })
+        }
         }
     },
     {
@@ -157,34 +176,34 @@ function isTokenExpired(token) {
   }
 }
 
-router.beforeEach((to, from, next) => {
-  if (to.meta.requireAuth) {
-
-    if (to.meta.authType === 'admin') {
-      const token = localStorage.getItem('admin_token');
-      if (token && !isTokenExpired(token)) {
-        next();
-      } else {
-        localStorage.removeItem('admin_token'); // clean up expired token
-        next('/login-admin');
-      }
-      return;
-    }
-
-    if (to.meta.authType === 'siswa') {
-      const token = localStorage.getItem('Authorization');
-      if (token && !isTokenExpired(token)) {
-        next();
-      } else {
-        localStorage.removeItem('Authorization'); // clean up expired token
-        next('/login-siswa');
-      }
-      return;
-    }
-
-  } else {
-    next();
+router.beforeEach(async (to, from, next) => {
+  if (!to.meta.requireAuth) {
+    return next(); // public route, allow
   }
+
+  if (to.meta.authType === 'admin') {
+    const adminStore = useAdminStore();
+    const isAuth = await adminStore.checkAuth();
+    if (isAuth) {
+      next();
+    } else {
+      next('/login-admin');
+    }
+    return;
+  }
+
+  if (to.meta.authType === 'siswa') {
+    const siswaStore = useSiswaStore(); // 👈 use store instead of localStorage
+    const isAuth = await siswaStore.checkAuth();
+    if (isAuth) {
+      next();
+    } else {
+      next('/login-siswa');
+    }
+    return;
+  }
+
+  next();
 });
 
 export default router;

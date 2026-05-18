@@ -31,11 +31,7 @@ onMounted(() => {
 
 async function GetAspirasiByID() {
   try {
-    const res = await axios.get(`/api/aspirasi/${IDaspirasi}`, {
-      headers: {
-        Authorization: localStorage.getItem("admin_token") || "",
-      },
-    });
+    const res = await axios.get(`/api/aspirasi/${IDaspirasi}`);
     AspirasiData.value = {
       nis: res.data.nis,
       id_kategori: res.data.id_kategori,
@@ -53,11 +49,7 @@ async function GetAspirasiByID() {
 
 async function GetKategoriData() {
   try {
-    const res = await axios.get("/api/kategori", {
-      headers: {
-        Authorization: localStorage.getItem("admin_token") || "",
-      },
-    });
+    const res = await axios.get("/api/kategori");
     KategoriList.value = res.data;
   } catch (error) {
     console.error("Error fetching siswa data:", error);
@@ -66,11 +58,7 @@ async function GetKategoriData() {
 
 async function GetUserData() {
   try {
-    const res = await axios.get("/api/user", {
-      headers: {
-        Authorization: localStorage.getItem("admin_token") || "",
-      },
-    });
+    const res = await axios.get("/api/user");
     AdminList.value = res.data;
   } catch (error) {
     console.error("Error fetching siswa data:", error);
@@ -89,11 +77,7 @@ async function EditData() {
   }
   try {
     axios
-      .put(`/api/aspirasi/admin/update/${IDaspirasi}`, AspirasiData.value, {
-        headers: {
-          Authorization: localStorage.getItem("admin_token") || "",
-        },
-      })
+      .put(`/api/aspirasi/admin/update/${IDaspirasi}`, AspirasiData.value)
       .then(() => {
         toast.success("Aspirasi berhasil diperbarui");
         router.push("/admin");

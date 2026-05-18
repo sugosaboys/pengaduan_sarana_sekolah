@@ -18,8 +18,6 @@ async function LoginSiswa() {
   }
   try {
     const res = await axios.post("/api/authsiswa/login", field.value);
-    const token = res.data.token;
-    localStorage.setItem("Authorization", token);
     router.push("/");
     toast.success("Login successfull!");
   } catch (error) {

@@ -1,6 +1,6 @@
-exports.logout = async (req,res) => {
+exports.logoutsiswa = async (req,res) => {
     try {
-        res.cookie('admin_token',{
+        res.cookie('siswa_token',{
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             sameSite: process.env.NODE_ENV === 'production' ? 'Strict' : 'Lax',

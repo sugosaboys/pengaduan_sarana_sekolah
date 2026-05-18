@@ -17,11 +17,7 @@ const KategoriData = ref({
 
 onMounted(async () => {
   try {
-    const res = await axios.get(`/api/kategori/${IDkategori}`, {
-      headers: {
-        Authorization: localStorage.getItem("admin_token") || "",
-      },
-    });
+    const res = await axios.get(`/api/kategori/${IDkategori}`);
     KategoriData.value = {
       ket_kategori: res.data.ket_kategori,
     };
@@ -37,11 +33,7 @@ async function EditData() {
     return;
   }
   try {
-    await axios.put(`/api/kategori/update/${IDkategori}`, KategoriData.value, {
-      headers: {
-        Authorization: localStorage.getItem("admin_token") || "",
-      },
-    });
+    await axios.put(`/api/kategori/update/${IDkategori}`, KategoriData.value);
     toast.success("Kategori berhasil diperbarui");
     router.push("/admin/kelola/kategori");
   } catch (error) {

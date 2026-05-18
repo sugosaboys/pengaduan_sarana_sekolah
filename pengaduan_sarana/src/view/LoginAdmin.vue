@@ -18,8 +18,6 @@ async function loginAdmin() {
   }
   try {
     const res = await axios.post("/api/user/login", field.value);
-    const token = res.data.token;
-    localStorage.setItem("admin_token", token);
     router.push("/admin");
     toast.success("Login successfuly!");
   } catch (error) {

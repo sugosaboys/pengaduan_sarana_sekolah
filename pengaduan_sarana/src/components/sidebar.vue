@@ -1,4 +1,5 @@
 <script setup>
+import axios from "axios";
 import { useRoute } from 'vue-router';
 import { useSiswaStore } from '@/stores/siswaStore';
 import router from '../router';
@@ -10,9 +11,9 @@ const isRouteActive = (RoutePath)=>{
     return router.path === RoutePath
 }
 //logout
-function logout(){
-    localStorage.removeItem('Authorization');
-    SiswaInfoStore.ClearSiswaInfo();
+async function logout(){
+    await axios.post('/api/authsiswa/logout');
+    SiswaInfoStore.clearSiswaInfo();
     router.push('/login-siswa');
 }
 </script>
@@ -23,7 +24,7 @@ function logout(){
         <div class="flex flex-col items-start justify-start h-full px-3 py-4 overflow-y-auto">
             <span class="border-b border-gray-300 flex items-center w-full gap-2 py-2 mb-2">
                 <img src="/assets/login-logo.png" alt="logo" loading="lazy" class="w-[42px] object-cover">
-                <h2 class="HelveticaBold">Pengaduan sarana.</h2>
+                <h1 class="HelveticaBold">Pengaduan sarana.</h1>
             </span>
 
             <ul class="flex flex-col w-full h-full mt-6 HelveticaMedium">
